@@ -1,15 +1,21 @@
-# base Docker image that we will build on
-FROM python:3.9-slim
+FROM python:3.13.11-slim
 
-# set up our image by installing prerequisites; pandas in this case
-RUN pip install pandas pyarrow 
+# Copy UV package manager
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
-# set up the working directory inside the container
 WORKDIR /app
 
-# copy the script to the container. 1st name is source file, 2nd is destination
-COPY pipeline.py pipeline.py
+# Add virtual environment to PATH
+ENV PATH="/app/.venv/bin:$PATH"
 
-# define what to do first when the container runs
-# in this example, we will just run the script
-ENTRYPOINT ["python", "pipeline.py"]
+# Copy dependency files first (for Docker layer caching)
+COPY "pyproject.toml" "uv.lock" ".python-version" ./
+
+# Install dependencies
+RUN uv sync --locked
+
+# Copy application code
+COPY ingest_data.py ingest_data.py
+
+# Set entry point
+ENTRYPOINT ["python", "ingest_data.py"]
