@@ -1,5 +1,4 @@
 # data-engineering-zoomcamp
-data engineering zoomcamp codespaces
 
 ## Docker and PostgreSQL Workshop
 
