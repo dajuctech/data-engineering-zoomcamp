@@ -1,15 +1,28 @@
-# base Docker image that we will build on
-FROM python:3.9-slim
+# Start with slim Python 3.13 image
+FROM python:3.13.11-slim
 
-# set up our image by installing prerequisites; pandas in this case
-RUN pip install pandas pyarrow 
+# Install system dependencies for PostgreSQL
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# set up the working directory inside the container
+# Copy uv binary from official uv image
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
+
+# Set working directory
 WORKDIR /app
 
-# copy the script to the container. 1st name is source file, 2nd is destination
-COPY pipeline.py pipeline.py
+# Add virtual environment to PATH
+ENV PATH="/app/.venv/bin:$PATH"
 
-# define what to do first when the container runs
-# in this example, we will just run the script
-ENTRYPOINT ["python", "pipeline.py"]
+# Copy dependency files first
+COPY "pyproject.toml" "uv.lock" ".python-version" ./
+
+# Install dependencies (only production, not dev)
+RUN uv sync --locked --no-dev
+
+# Copy application code
+COPY ingest_data.py ingest_data.py
+
+# Set entry point
+ENTRYPOINT ["python", "ingest_data.py"]
