@@ -1,7 +1,12 @@
 # data-engineering-zoomcamp
+<<<<<<< HEAD
 Data Engineering Zoomcamp - Learning Journey
 
 ## Week 1: Introduction to Data Engineering
+=======
+
+## Docker and PostgreSQL Workshop
+>>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
 
 Learned how to:
 - Set up a data ingestion pipeline using Python and Docker
@@ -9,6 +14,7 @@ Learned how to:
 - Ingest CSV data into PostgreSQL in chunks using pandas and SQLAlchemy
 - Manage Python dependencies with UV in a containerized environment
 - Create reproducible data pipelines with multi-stage Docker builds
+<<<<<<< HEAD
 
 ### SQL Refresher Workshop (1.2.6)
 Learned how to:
@@ -69,3 +75,5 @@ terraform apply     # Create/update infrastructure
 terraform destroy   # Remove all managed resources
 terraform show      # Display current state
 terraform output    # Show output values
+=======
+>>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Start with slim Python 3.13 image
 FROM python:3.13.11-slim
 
@@ -10,19 +11,38 @@ RUN apt-get update && apt-get install -y \
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
 # Set working directory
+=======
+FROM python:3.13.11-slim
+
+# Copy UV package manager
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
+
+>>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
 WORKDIR /app
 
 # Add virtual environment to PATH
 ENV PATH="/app/.venv/bin:$PATH"
 
+<<<<<<< HEAD
 # Copy dependency files first
 COPY "pyproject.toml" "uv.lock" ".python-version" ./
 
 # Install dependencies (only production, not dev)
 RUN uv sync --locked --no-dev
+=======
+# Copy dependency files first (for Docker layer caching)
+COPY "pyproject.toml" "uv.lock" ".python-version" ./
+
+# Install dependencies
+RUN uv sync --locked
+>>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
 
 # Copy application code
 COPY ingest_data.py ingest_data.py
 
 # Set entry point
+<<<<<<< HEAD
 ENTRYPOINT ["python", "ingest_data.py"]
+=======
+ENTRYPOINT ["python", "ingest_data.py"]
+>>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
