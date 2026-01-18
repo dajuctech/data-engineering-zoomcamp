@@ -1,9 +1,8 @@
 # data-engineering-zoomcamp
-<<<<<<< HEAD
+
 Data Engineering Zoomcamp - Learning Journey
 
 ## Week 1: Introduction to Data Engineering
-=======
 
 ## Docker and PostgreSQL Workshop
 
@@ -13,7 +12,6 @@ Learned how to:
 - Ingest CSV data into PostgreSQL in chunks using pandas and SQLAlchemy
 - Manage Python dependencies with UV in a containerized environment
 - Create reproducible data pipelines with multi-stage Docker builds
-<<<<<<< HEAD
 
 ### SQL Refresher Workshop (1.2.6)
 Learned how to:
