@@ -112,3 +112,11 @@ bfg.jar
 # Uncomment below if you want to allow specific JSON files:
 # !package.json
 # !tsconfig.json
+
+# ============================================
+# HOMEWORK ANSWERS (keep private)
+# ============================================
+**/week1_answer.md
+*_answer.md
+**/answers.md
+homework_answers.md
