@@ -6,7 +6,6 @@ Data Engineering Zoomcamp - Learning Journey
 =======
 
 ## Docker and PostgreSQL Workshop
->>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
 
 Learned how to:
 - Set up a data ingestion pipeline using Python and Docker
@@ -75,5 +74,3 @@ terraform apply     # Create/update infrastructure
 terraform destroy   # Remove all managed resources
 terraform show      # Display current state
 terraform output    # Show output values
-=======
->>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
