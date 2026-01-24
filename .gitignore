@@ -10,6 +10,8 @@ my-creds.json
 keys/
 **/keys/
 terrademo/keys/
+**/terraform/*/keys/
+01-docker-terraform/terraform/*/keys/
 
 # ============================================
 # TERRAFORM
@@ -41,6 +43,8 @@ data/*.parquet
 data/*.csv
 pipeline/*.csv
 pipeline/*.csv.gz
+01-docker-terraform/docker-sql/pipeline/*.csv
+01-docker-terraform/docker-sql/pipeline/*.csv.gz
 pipeline/taxi_zone_lookup.csv
 pipeline/yellow_tripdata_*.csv.gz
 pipeline/green_tripdata_*.csv.gz
@@ -66,6 +70,8 @@ venv/
 postgres_data/
 pgadmin_data/
 pipeline/ny_taxi_postgres_data/
+01-docker-terraform/docker-sql/pipeline/ny_taxi_postgres_data/
+**/ny_taxi_postgres_data/
 
 # ============================================
 # ENVIRONMENT VARIABLES
@@ -113,10 +119,4 @@ bfg.jar
 # !package.json
 # !tsconfig.json
 
-# ============================================
-# HOMEWORK ANSWERS (keep private)
-# ============================================
-**/week1_answer.md
-*_answer.md
-**/answers.md
-homework_answers.md
+
