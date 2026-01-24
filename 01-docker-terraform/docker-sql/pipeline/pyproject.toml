@@ -1,16 +1,12 @@
 [project]
 name = "pipeline"
 version = "0.1.0"
-description = "Add your description here"
+description = "NYC Taxi Data Ingestion Pipeline"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "click>=8.1.7",
     "pandas>=2.3.3",
-<<<<<<< HEAD
-=======
-    "psycopg2>=2.9.11",
->>>>>>> 4323997967040fc8cfae85d3cb766a303dbfff40
     "psycopg2-binary>=2.9.11",
     "pyarrow>=22.0.0",
     "sqlalchemy>=2.0.45",

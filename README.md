@@ -2,6 +2,35 @@
 
 Data Engineering Zoomcamp - Learning Journey
 
+## Project Structure
+
+```
+data-engineering-zoomcamp/
+├── 01-docker-terraform/
+│   ├── 01-documentation.md          # Comprehensive module notes
+│   ├── week1_2026_answer.md         # Homework answers
+│   ├── docker-sql/
+│   │   └── pipeline/
+│   │       ├── Dockerfile           # Multi-stage Docker build
+│   │       ├── docker-compose.yaml  # PostgreSQL + pgAdmin setup
+│   │       ├── ingest_data.py       # Data ingestion script
+│   │       ├── notebook.ipynb       # Exploratory analysis
+│   │       └── pyproject.toml       # Python dependencies (UV)
+│   ├── queries/
+│   │   ├── 01_basic_queries.sql     # SELECT, COUNT, GROUP BY
+│   │   ├── 02_join_queries.sql      # INNER, LEFT, RIGHT JOINs
+│   │   ├── 03_group_by_with_joins.sql
+│   │   └── 04_check_missing_data.sql
+│   └── terraform/
+│       ├── terraform_basic/
+│       │   └── main.tf              # Simple Terraform config
+│       └── terraform_with_variables/
+│           ├── main.tf              # GCS bucket + BigQuery dataset
+│           └── variables.tf         # Configurable variables
+├── .gitignore
+└── README.md
+```
+
 ## Week 1: Introduction to Data Engineering
 
 ## Docker and PostgreSQL Workshop
@@ -72,3 +101,4 @@ terraform apply     # Create/update infrastructure
 terraform destroy   # Remove all managed resources
 terraform show      # Display current state
 terraform output    # Show output values
+```
