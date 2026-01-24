@@ -1,104 +1,170 @@
-# data-engineering-zoomcamp
+# 🚀 Data Engineering Zoomcamp
 
-Data Engineering Zoomcamp - Learning Journey
+[![Course](https://img.shields.io/badge/Course-Data%20Engineering%20Zoomcamp-blue)](https://github.com/DataTalksClub/data-engineering-zoomcamp)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-24.x-blue.svg)](https://www.docker.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-1.x-purple.svg)](https://www.terraform.io/)
 
-## Project Structure
+A hands-on learning journey through the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) by DataTalks.Club. This repository contains my notes, code implementations, and homework solutions for each module.
+
+## 📋 Table of Contents
+
+- [About](#-about)
+- [Technologies](#-technologies)
+- [Project Structure](#-project-structure)
+- [Modules](#-modules)
+  - [Module 1: Docker, Terraform & SQL](#module-1-docker-terraform--sql)
+- [Getting Started](#-getting-started)
+- [Resources](#-resources)
+
+## 🎯 About
+
+This repository documents my progress through the Data Engineering Zoomcamp, a free 9-week course covering:
+
+- **Containerization** with Docker
+- **Infrastructure as Code** with Terraform
+- **Data Warehousing** with BigQuery
+- **Workflow Orchestration** with Mage/Airflow
+- **Analytics Engineering** with dbt
+- **Batch Processing** with Spark
+- **Stream Processing** with Kafka
+
+## 🛠️ Technologies
+
+| Category | Technologies |
+|----------|-------------|
+| **Containerization** | Docker, Docker Compose |
+| **Languages** | Python, SQL, HCL |
+| **Databases** | PostgreSQL, BigQuery |
+| **Infrastructure** | Terraform, Google Cloud Platform |
+| **Data Processing** | pandas, SQLAlchemy |
+| **Tools** | pgAdmin, Jupyter, UV |
+
+## 📁 Project Structure
 
 ```
 data-engineering-zoomcamp/
-├── 01-docker-terraform/
-│   ├── 01-documentation.md          # Comprehensive module notes
-│   ├── week1_2026_answer.md         # Homework answers
-│   ├── docker-sql/
-│   │   └── pipeline/
-│   │       ├── Dockerfile           # Multi-stage Docker build
-│   │       ├── docker-compose.yaml  # PostgreSQL + pgAdmin setup
-│   │       ├── ingest_data.py       # Data ingestion script
-│   │       ├── notebook.ipynb       # Exploratory analysis
-│   │       └── pyproject.toml       # Python dependencies (UV)
-│   ├── queries/
-│   │   ├── 01_basic_queries.sql     # SELECT, COUNT, GROUP BY
-│   │   ├── 02_join_queries.sql      # INNER, LEFT, RIGHT JOINs
-│   │   ├── 03_group_by_with_joins.sql
-│   │   └── 04_check_missing_data.sql
-│   └── terraform/
-│       ├── terraform_basic/
-│       │   └── main.tf              # Simple Terraform config
-│       └── terraform_with_variables/
-│           ├── main.tf              # GCS bucket + BigQuery dataset
-│           └── variables.tf         # Configurable variables
-├── .gitignore
-└── README.md
+│
+├── 01-docker-terraform/              # Module 1: Docker, Terraform & SQL
+│   ├── 01-documentation.md           # 📘 Comprehensive module notes (5500+ lines)
+│   ├── week1_2026_answer.md          # ✅ Homework solutions
+│   │
+│   ├── docker-sql/                   # Docker & PostgreSQL Workshop
+│   │   ├── README.md                 # Setup instructions
+│   │   └── pipeline/                 # Data ingestion pipeline
+│   │       ├── Dockerfile            # Multi-stage Docker build
+│   │       ├── docker-compose.yaml   # PostgreSQL + pgAdmin services
+│   │       ├── ingest_data.py        # NYC Taxi data ingestion script
+│   │       ├── notebook.ipynb        # Exploratory data analysis
+│   │       └── pyproject.toml        # Python dependencies (UV)
+│   │
+│   ├── queries/                      # SQL Practice Queries
+│   │   ├── 01_basic_queries.sql      # SELECT, COUNT, GROUP BY
+│   │   ├── 02_join_queries.sql       # INNER, LEFT, RIGHT, OUTER JOINs
+│   │   ├── 03_group_by_with_joins.sql# Aggregations with JOINs
+│   │   └── 04_check_missing_data.sql # Data quality checks
+│   │
+│   └── terraform/                    # Infrastructure as Code
+│       ├── README.md                 # Terraform setup guide
+│       ├── terraform_basic/          # Simple hardcoded config
+│       │   └── main.tf
+│       └── terraform_with_variables/ # Parameterized config
+│           ├── main.tf               # GCS bucket + BigQuery dataset
+│           └── variables.tf          # Configurable variables
+│
+├── .gitignore                        # Git ignore patterns
+└── README.md                         # This file
 ```
 
-## Week 1: Introduction to Data Engineering
+## 📚 Modules
 
-## Docker and PostgreSQL Workshop
+### Module 1: Docker, Terraform & SQL
 
-Learned how to:
-- Set up a data ingestion pipeline using Python and Docker
-- Use Docker Compose to orchestrate PostgreSQL and pgAdmin containers
-- Ingest CSV data into PostgreSQL in chunks using pandas and SQLAlchemy
-- Manage Python dependencies with UV in a containerized environment
-- Create reproducible data pipelines with multi-stage Docker builds
+**Status:** ✅ Completed
 
-### SQL Refresher Workshop (1.2.6)
-Learned how to:
-- Join tables using implicit (WHERE) and explicit (JOIN) syntax
-- Use INNER JOIN, LEFT JOIN, RIGHT JOIN, and OUTER JOIN
-- Check for missing data with NOT IN and IS NULL
-- Aggregate data using GROUP BY with COUNT, MAX, and other functions
-- Order results with ORDER BY (ASC/DESC)
-- Combine location data from zones table with taxi trip data
-- Write complex SQL queries for data analysis and reporting
+| Topic | Description | Resources |
+|-------|-------------|-----------|
+| **Docker Basics** | Containerization fundamentals, Dockerfile, images | [Documentation](01-docker-terraform/01-documentation.md) |
+| **PostgreSQL Setup** | Database in Docker, data persistence | [Pipeline](01-docker-terraform/docker-sql/pipeline/) |
+| **Data Ingestion** | Python pipeline for NYC Taxi data (1.3M+ records) | [ingest_data.py](01-docker-terraform/docker-sql/pipeline/ingest_data.py) |
+| **Docker Compose** | Multi-container orchestration | [docker-compose.yaml](01-docker-terraform/docker-sql/pipeline/docker-compose.yaml) |
+| **SQL Refresher** | JOINs, GROUP BY, aggregations | [Queries](01-docker-terraform/queries/) |
+| **GCP Setup** | Service accounts, Cloud Storage, BigQuery | [Documentation](01-docker-terraform/01-documentation.md) |
+| **Terraform** | Infrastructure as Code for GCP | [Terraform](01-docker-terraform/terraform/) |
 
-### Google Cloud Platform Setup (1.2.7)
-Learned how to:
-- Set up a GCP account with $300 free trial credits
-- Create and configure a GCP project for data engineering workloads
-- Set up service accounts with proper IAM roles (Storage Admin, BigQuery Admin)
-- Configure Google Cloud SDK authentication using service account JSON keys
-- Create and manage Cloud Storage buckets with regional configuration
-- Upload datasets to Cloud Storage using `gsutil` CLI commands and GUI frontend
-- Run SQL queries in BigQuery Console GUI for data analysis
-- Work with environment variables for secure credential management
-- Navigate GCP Console for Cloud Storage and BigQuery operations
+#### Key Skills Acquired
 
-### Terraform Infrastructure as Code (1.3.1)
-Learned how to:
-- Install and configure Terraform for infrastructure provisioning
-- Understand Infrastructure as Code (IaC) principles and benefits
-- Define cloud resources in declarative `.tf` configuration files
-- Use Terraform providers to communicate with GCP APIs
-- Separate configuration into `main.tf`, `variables.tf`, and `outputs.tf` files
-- Declare and reference variables across Terraform files using `var.variable_name`
-- Initialize Terraform projects with `terraform init` to download provider plugins
-- Preview infrastructure changes with `terraform plan` before applying
-- Provision GCP resources (Cloud Storage buckets, BigQuery datasets) with `terraform apply`
-- Manage infrastructure state with `.tfstate` files
-- Destroy all managed resources cleanly with `terraform destroy`
-- Secure sensitive files using `.gitignore` for credentials and state files
-- Configure bucket lifecycle rules for automatic data deletion
-- Set up multi-region storage locations for high availability
+- 🐳 Building and running Docker containers
+- 🐘 Setting up PostgreSQL with Docker Compose
+- 🐍 Creating data pipelines with Python & pandas
+- 📊 Writing complex SQL queries with JOINs
+- ☁️ Configuring GCP resources (GCS, BigQuery)
+- 🏗️ Provisioning infrastructure with Terraform
 
-**Skills Acquired:**
-- Terraform CLI workflow (`init`, `plan`, `apply`, `destroy`, `fmt`, `validate`)
-- Writing HCL (HashiCorp Configuration Language) syntax
-- Managing GCP resources programmatically via Terraform
-- Version controlling infrastructure configurations
-- Implementing reproducible infrastructure deployments
-- Separating configuration from implementation using variables
-- Securing credentials in Terraform projects
-- Understanding immutable infrastructure concepts
+#### Quick Start - Module 1
 
-**Key Terraform Commands:**
 ```bash
-terraform init      # Initialize and download providers
-terraform fmt       # Format code to standard style
-terraform validate  # Check syntax and configuration
-terraform plan      # Preview changes before applying
-terraform apply     # Create/update infrastructure
-terraform destroy   # Remove all managed resources
-terraform show      # Display current state
-terraform output    # Show output values
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/data-engineering-zoomcamp.git
+cd data-engineering-zoomcamp/01-docker-terraform/docker-sql/pipeline
+
+# Start PostgreSQL and pgAdmin
+docker compose up -d
+
+# Access pgAdmin at http://localhost:8085
+# Email: admin@admin.com | Password: root
+
+# Run data ingestion
+docker build -t taxi-ingest .
+docker run --network=pipeline_default taxi-ingest \
+  --pg-host pgdatabase --pg-user root --pg-pass root \
+  --pg-db ny_taxi --target-table yellow_taxi_data \
+  --year 2021 --month 1
 ```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/get-started) (24.x or higher)
+- [Git](https://git-scm.com/downloads)
+- [Terraform](https://www.terraform.io/downloads) (for IaC modules)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) (for GCP modules)
+
+### Environment Setup
+
+**Option 1: GitHub Codespaces (Recommended)**
+1. Fork this repository
+2. Click "Code" → "Codespaces" → "Create codespace on main"
+3. Wait for the environment to initialize
+
+**Option 2: Local Development**
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/data-engineering-zoomcamp.git
+cd data-engineering-zoomcamp
+
+# Verify Docker is running
+docker --version
+docker compose version
+```
+
+## 🔗 Resources
+
+### Official Course Materials
+- [Data Engineering Zoomcamp Repository](https://github.com/DataTalksClub/data-engineering-zoomcamp)
+- [Course YouTube Playlist](https://www.youtube.com/playlist?list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb)
+- [DataTalks.Club Slack](https://datatalks.club/slack.html)
+
+### Documentation
+- [Docker Documentation](https://docs.docker.com/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- [Terraform GCP Provider](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
+- [Google Cloud Documentation](https://cloud.google.com/docs)
+
+---
+
+<p align="center">
+  <b>Happy Learning! 🎓</b>
+</p>
