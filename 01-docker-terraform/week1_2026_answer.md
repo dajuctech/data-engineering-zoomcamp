@@ -135,14 +135,4 @@ LIMIT 1;
 
 **Answer**: terraform init, terraform apply -auto-approve, terraform destroy
 
-**Explanation**:
-- **`terraform init`**: Downloads provider plugins (e.g., google, aws) and initializes the backend (state storage)
-- **`terraform apply -auto-approve`**: Generates execution plan and automatically applies changes without prompting for confirmation
-- **`terraform destroy`**: Removes all resources that Terraform currently manages (as recorded in state file)
-
-**Why other options are wrong**:
-- `terraform import`: Imports existing resources into Terraform state (not for initial setup)
-- `terraform plan -auto-apply`: Not a valid flag combination
-- `terraform run`: Not a valid Terraform command
-- `terraform rm`: Not a valid command (should be `terraform state rm` for removing from state)
-
+---
