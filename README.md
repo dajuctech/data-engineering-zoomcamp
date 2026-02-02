@@ -15,6 +15,7 @@ A hands-on learning journey through the [Data Engineering Zoomcamp](https://gith
 - [Project Structure](#-project-structure)
 - [Modules](#-modules)
   - [Module 1: Docker, Terraform & SQL](#module-1-docker-terraform--sql)
+  - [Module 2: Workflow Orchestration](#module-2-workflow-orchestration)
 - [Getting Started](#-getting-started)
 - [Resources](#-resources)
 
@@ -25,7 +26,7 @@ This repository documents my progress through the Data Engineering Zoomcamp, a f
 - **Containerization** with Docker
 - **Infrastructure as Code** with Terraform
 - **Data Warehousing** with BigQuery
-- **Workflow Orchestration** with Mage/Airflow
+- **Workflow Orchestration** with Kestra
 - **Analytics Engineering** with dbt
 - **Batch Processing** with Spark
 - **Stream Processing** with Kafka
@@ -35,10 +36,13 @@ This repository documents my progress through the Data Engineering Zoomcamp, a f
 | Category | Technologies |
 |----------|-------------|
 | **Containerization** | Docker, Docker Compose |
-| **Languages** | Python, SQL, HCL |
-| **Databases** | PostgreSQL, BigQuery |
-| **Infrastructure** | Terraform, Google Cloud Platform |
+| **Orchestration** | Kestra |
+| **Languages** | Python, SQL, HCL, YAML |
+| **Databases** | PostgreSQL, BigQuery, DuckDB |
+| **Cloud** | Google Cloud Platform (GCS, BigQuery) |
+| **Infrastructure** | Terraform |
 | **Data Processing** | pandas, SQLAlchemy |
+| **AI/ML** | Gemini, RAG, Embeddings |
 | **Tools** | pgAdmin, Jupyter, UV |
 
 ## 📁 Project Structure
@@ -73,8 +77,25 @@ data-engineering-zoomcamp/
 │           ├── main.tf               # GCS bucket + BigQuery dataset
 │           └── variables.tf          # Configurable variables
 │
-├── .gitignore                        # Git ignore patterns
-└── README.md                         # This file
+├── 02-workflow-orchestration/            # Module 2: Workflow Orchestration
+│   ├── README.md                        # Setup & usage instructions
+│   ├── week2_2026_answer.md             # ✅ Homework solutions
+│   ├── docker-compose.yml               # Kestra + PostgreSQL + pgAdmin
+│   └── flows/                           # Kestra workflow definitions
+│       ├── 01_hello_world.yaml          # Basics: tasks, inputs, triggers
+│       ├── 02_python.yaml               # Python in Docker containers
+│       ├── 03_getting_started_data_pipeline.yaml  # Extract → Transform → Query
+│       ├── 04_postgres_taxi.yaml        # ETL: Taxi data → PostgreSQL
+│       ├── 05_postgres_taxi_scheduled.yaml  # Scheduled ETL + backfill
+│       ├── 06_gcp_kv_from_env.yaml      # GCP KV Store configuration
+│       ├── 07_gcp_setup.yaml            # Create GCS bucket + BQ dataset
+│       ├── 08_gcp_taxi.yaml             # ELT: Taxi data → GCS → BigQuery
+│       ├── 09_gcp_taxi_scheduled.yaml   # Scheduled ELT + backfill
+│       ├── 10_chat_without_rag.yaml     # AI without context
+│       └── 11_chat_with_rag.yaml        # AI with RAG
+│
+├── .gitignore                           # Git ignore patterns
+└── README.md                            # This file
 ```
 
 ## 📚 Modules
@@ -101,6 +122,55 @@ data-engineering-zoomcamp/
 - 📊 Writing complex SQL queries with JOINs
 - ☁️ Configuring GCP resources (GCS, BigQuery)
 - 🏗️ Provisioning infrastructure with Terraform
+
+---
+
+### Module 2: Workflow Orchestration
+
+**Status:** ✅ Completed
+
+| Topic | Description | Resources |
+|-------|-------------|-----------|
+| **Workflow Orchestration** | Why orchestration matters, core concepts | [README](02-workflow-orchestration/README.md) |
+| **Kestra Fundamentals** | Flows, tasks, inputs, triggers, variables | [Hello World](02-workflow-orchestration/flows/01_hello_world.yaml) |
+| **Python Orchestration** | Running Python in Docker via Kestra | [Flow](02-workflow-orchestration/flows/02_python.yaml) |
+| **ETL Pipeline (Local)** | NYC Taxi data → PostgreSQL with dedup | [Flow](02-workflow-orchestration/flows/04_postgres_taxi.yaml) |
+| **Scheduling & Backfills** | Cron triggers, historical data loading | [Flow](02-workflow-orchestration/flows/05_postgres_taxi_scheduled.yaml) |
+| **ETL vs ELT** | Traditional vs cloud-native data loading | [README](02-workflow-orchestration/README.md) |
+| **GCP ELT Pipeline** | Taxi data → GCS → BigQuery (external tables, MERGE) | [Flow](02-workflow-orchestration/flows/08_gcp_taxi.yaml) |
+| **AI & RAG** | Context engineering, hallucination prevention | [Without RAG](02-workflow-orchestration/flows/10_chat_without_rag.yaml), [With RAG](02-workflow-orchestration/flows/11_chat_with_rag.yaml) |
+
+#### Key Skills Acquired
+
+- 🔄 Building orchestrated data pipelines with Kestra (YAML-as-code)
+- 🗄️ ETL to PostgreSQL with staging tables and MERGE deduplication
+- ☁️ ELT to GCS + BigQuery with external tables and partitioning
+- ⏰ Scheduling pipelines with cron triggers and backfilling historical data
+- 🔑 Managing secrets with KV Store and environment variables
+- 🤖 Using AI (Gemini) and RAG for context-grounded workflow generation
+
+#### Quick Start - Module 2
+
+```bash
+cd data-engineering-zoomcamp/02-workflow-orchestration
+
+# Configure .env with your GCP credentials (see README)
+
+# Start Kestra + PostgreSQL + pgAdmin
+docker compose up -d
+
+# Access Kestra UI at http://localhost:8080
+# Email: admin@kestra.io | Password: Admin1234!
+
+# Import all flows
+for f in flows/*.yaml; do
+  curl -X POST -u 'admin@kestra.io:Admin1234' \
+    http://localhost:8080/api/v1/flows/import \
+    -F "fileUpload=@$f"
+done
+```
+
+---
 
 #### Quick Start - Module 1
 
@@ -161,6 +231,7 @@ docker compose version
 - [Docker Documentation](https://docs.docker.com/)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Terraform GCP Provider](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
+- [Kestra Documentation](https://kestra.io/docs)
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 
 ---
