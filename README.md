@@ -6,6 +6,7 @@
 [![Docker](https://img.shields.io/badge/Docker-24.x-blue.svg)](https://www.docker.com/)
 [![Terraform](https://img.shields.io/badge/Terraform-1.x-purple.svg)](https://www.terraform.io/)
 [![Kestra](https://img.shields.io/badge/Kestra-1.1-green.svg)](https://kestra.io/)
+[![BigQuery](https://img.shields.io/badge/BigQuery-Data%20Warehouse-4285F4.svg)](https://cloud.google.com/bigquery)
 
 A hands-on learning journey through the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) by DataTalks.Club (2026 Cohort). This repository contains my code implementations, workflow definitions, and homework solutions for each module.
 
@@ -18,6 +19,7 @@ A hands-on learning journey through the [Data Engineering Zoomcamp](https://gith
 - [Modules](#-modules)
   - [Module 1: Docker, Terraform & SQL](#module-1-docker-terraform--sql)
   - [Module 2: Workflow Orchestration](#module-2-workflow-orchestration)
+  - [Module 3: Data Warehouse](#module-3-data-warehouse)
 - [Getting Started](#-getting-started)
 - [Resources](#-resources)
 
@@ -27,7 +29,7 @@ A hands-on learning journey through the [Data Engineering Zoomcamp](https://gith
 |--------|-------|--------|
 | 1 | [Docker, Terraform & SQL](#module-1-docker-terraform--sql) | ✅ Completed |
 | 2 | [Workflow Orchestration](#module-2-workflow-orchestration) | ✅ Completed |
-| 3 | Data Warehousing (BigQuery) | ⬜ Upcoming |
+| 3 | [Data Warehousing (BigQuery)](#module-3-data-warehouse) | ✅ Completed |
 | 4 | Analytics Engineering (dbt) | ⬜ Upcoming |
 | 5 | Batch Processing (Spark) | ⬜ Upcoming |
 | 6 | Stream Processing (Kafka) | ⬜ Upcoming |
@@ -37,23 +39,25 @@ A hands-on learning journey through the [Data Engineering Zoomcamp](https://gith
 The course builds a complete data engineering pipeline progressively across modules:
 
 ```
-Module 1                    Module 2                         Module 3+
+Module 1                    Module 2                         Module 3
 ────────                    ────────                         ────────
-                            Kestra Orchestration
-                            ┌─────────────────────┐
-NYC Taxi CSV ──→ Docker ──→ │ Extract (wget)      │
-                            │   ↓                 │
-                PostgreSQL ←│ Load (local ETL)    │         BigQuery
-                            │   ↓                 │         (Data Warehouse)
-                            │ GCS Upload          │──→        ↓
-                            │   ↓                 │         dbt Models
-                            │ BigQuery (cloud ELT)│──→        ↓
-                            └─────────────────────┘         Dashboards
-Terraform ──→ GCS Bucket + BigQuery Dataset
+                            Kestra Orchestration             BigQuery
+                            ┌─────────────────────┐          ┌─────────────────────┐
+NYC Taxi CSV ──→ Docker ──→ │ Extract (wget)      │          │ External Tables     │
+                            │   ↓                 │          │   ↓                 │
+                PostgreSQL ←│ Load (local ETL)    │          │ Partitioned Tables  │
+                            │   ↓                 │          │   ↓                 │
+                            │ GCS Upload          │────────→ │ Clustered Tables    │
+                            │   ↓                 │          │   ↓                 │
+                            │ BigQuery (cloud ELT)│          │ BigQuery ML         │
+                            └─────────────────────┘          │   ↓                 │
+Terraform ──→ GCS Bucket + BigQuery Dataset                  │ TensorFlow Serving  │
+                                                             └─────────────────────┘
 ```
 
 **Module 1** laid the foundation: Docker containers, PostgreSQL, SQL, Terraform for GCP.
 **Module 2** automated everything: orchestrated pipelines with scheduling, backfills, and cloud ELT.
+**Module 3** optimized analytics: partitioning, clustering, BigQuery ML, and model deployment.
 
 ## 🛠️ Technologies
 
@@ -65,8 +69,8 @@ Terraform ──→ GCS Bucket + BigQuery Dataset
 | **Databases** | PostgreSQL, BigQuery, DuckDB |
 | **Cloud** | Google Cloud Platform (GCS, BigQuery) |
 | **Infrastructure** | Terraform |
-| **Data Processing** | pandas, SQLAlchemy |
-| **AI/ML** | Gemini, RAG, Embeddings |
+| **Data Processing** | pandas, SQLAlchemy, Parquet |
+| **AI/ML** | Gemini, RAG, Embeddings, BigQuery ML, TensorFlow Serving |
 | **Tools** | pgAdmin, Jupyter, UV |
 
 ## 📁 Project Structure
@@ -75,7 +79,6 @@ Terraform ──→ GCS Bucket + BigQuery Dataset
 data-engineering-zoomcamp/
 │
 ├── 01-docker-terraform/                 # Module 1: Docker, Terraform & SQL
-│   ├── 01-documentation.md              # Comprehensive module notes
 │   ├── week1_2026_answer.md             # Homework solutions
 │   │
 │   ├── docker-sql/                      # Docker & PostgreSQL
@@ -118,6 +121,11 @@ data-engineering-zoomcamp/
 │       ├── 10_chat_without_rag.yaml     # AI without context (hallucinations)
 │       └── 11_chat_with_rag.yaml        # AI with RAG (grounded answers)
 │
+├── 03-data-warehouse/                   # Module 3: Data Warehouse
+│   ├── README.md                        # Setup & usage instructions
+│   ├── week3_2026_answer.md             # Homework solutions
+│   └── load_yellow_taxi_data.py         # Download & upload taxi data to GCS
+│
 ├── .gitignore                           # Git ignore patterns
 └── README.md                            # This file
 ```
@@ -136,7 +144,7 @@ data-engineering-zoomcamp/
 | **Docker Compose** | Multi-container orchestration (PostgreSQL + pgAdmin) | [docker-compose.yaml](01-docker-terraform/docker-sql/pipeline/docker-compose.yaml) |
 | **Data Ingestion** | Python CLI pipeline with pandas, chunked loading | [ingest_data.py](01-docker-terraform/docker-sql/pipeline/ingest_data.py) |
 | **SQL** | JOINs, GROUP BY, aggregations, data quality checks | [Queries](01-docker-terraform/queries/) |
-| **GCP Setup** | Service accounts, IAM roles, enabling APIs | [Documentation](01-docker-terraform/01-documentation.md) |
+| **GCP Setup** | Service accounts, IAM roles, enabling APIs | [README](01-docker-terraform/terraform/README.md) |
 | **Terraform** | Infrastructure as Code — GCS bucket + BigQuery dataset | [Terraform](01-docker-terraform/terraform/) |
 
 <details>
@@ -215,6 +223,54 @@ done
 
 ---
 
+### Module 3: Data Warehouse
+
+**Status:** ✅ Completed | [Full README](03-data-warehouse/README.md) | [Homework](03-data-warehouse/week3_2026_answer.md)
+
+> **Summary:** Explored BigQuery as a serverless data warehouse. Learned table optimization with partitioning and clustering, reducing query costs by 90%+. Built ML models directly in SQL with BigQuery ML and deployed them using TensorFlow Serving.
+
+| Topic | What I Learned | Code |
+|-------|----------------|------|
+| **OLTP vs OLAP** | Transaction systems vs analytical systems, columnar storage | [README](03-data-warehouse/README.md) |
+| **External Tables** | Reference GCS data without importing into BigQuery | [Homework](03-data-warehouse/week3_2026_answer.md) |
+| **Partitioning** | Divide tables by date/time for faster queries (90%+ reduction) | [Homework](03-data-warehouse/week3_2026_answer.md) |
+| **Clustering** | Organize data within partitions (additional 20-50% reduction) | [Homework](03-data-warehouse/week3_2026_answer.md) |
+| **BigQuery Internals** | Dremel, Colossus, Jupiter, Borg architecture | [README](03-data-warehouse/README.md) |
+| **BigQuery ML** | Train linear regression models in SQL | [README](03-data-warehouse/README.md) |
+| **Model Deployment** | Export models, serve with TensorFlow Serving in Docker | [README](03-data-warehouse/README.md) |
+| **Cost Optimization** | Query estimation, partitioning strategies, best practices | [README](03-data-warehouse/README.md) |
+
+**Key patterns implemented:**
+- **Partitioning** — Tables partitioned by `tpep_dropoff_datetime` for date-filtered queries
+- **Clustering** — Clustered by `VendorID` for filtered aggregations
+- **External vs Native** — External tables for exploration, native for production
+- **BigQuery ML** — Feature engineering with STRING casting for categorical variables
+- **Model serving** — REST API predictions via TensorFlow Serving container
+
+<details>
+<summary><b>Quick Start - Module 3</b></summary>
+
+```bash
+cd 03-data-warehouse
+
+# Configure credentials
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
+
+# Edit load_yellow_taxi_data.py with your bucket name
+# Then load data to GCS
+pip install google-cloud-storage
+python load_yellow_taxi_data.py
+
+# Create tables in BigQuery Console:
+# 1. External table (references GCS)
+# 2. Materialized table (non-partitioned)
+# 3. Optimized table (partitioned + clustered)
+```
+
+</details>
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -222,8 +278,9 @@ done
 - [Docker](https://www.docker.com/get-started) (24.x or higher)
 - [Git](https://git-scm.com/downloads)
 - [Terraform](https://www.terraform.io/downloads) (Module 1)
-- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) (Modules 1-2)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) (Modules 1-3)
 - GCP service account with `Storage Admin` + `BigQuery Admin` roles
+- Python 3.8+ with `google-cloud-storage` (Module 3)
 
 ### Environment Setup
 
@@ -244,7 +301,9 @@ docker compose version
 
 ### Data Source
 
-All modules use [NYC Taxi & Limousine Commission](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) trip data (yellow and green taxis, 2019-2021) via [DataTalksClub's CSV mirror](https://github.com/DataTalksClub/nyc-tlc-data/releases).
+All modules use [NYC Taxi & Limousine Commission](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page) trip data:
+- **Modules 1-2:** Yellow and green taxis (2019-2021) via [DataTalksClub's CSV mirror](https://github.com/DataTalksClub/nyc-tlc-data/releases)
+- **Module 3:** Yellow taxis (Jan-June 2024, ~20M records) via [NYC TLC Parquet files](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 
 ## 🔐 Security
 
@@ -269,3 +328,6 @@ All modules use [NYC Taxi & Limousine Commission](https://www.nyc.gov/site/tlc/a
 - [Kestra Plugins (600+)](https://go.kestra.io/de-zoomcamp/plugins)
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 - [BigQuery SQL Reference](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+- [BigQuery ML Documentation](https://cloud.google.com/bigquery-ml/docs)
+- [BigQuery Partitioning](https://cloud.google.com/bigquery/docs/partitioned-tables)
+- [BigQuery Clustering](https://cloud.google.com/bigquery/docs/clustered-tables)
