@@ -1,0 +1,7 @@
+
+target/
+dbt_packages/
+logs/
+dbt & bigquerry.md
+# Data directory
+data/

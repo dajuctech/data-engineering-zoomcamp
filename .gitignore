@@ -13,6 +13,13 @@ terrademo/keys/
 **/terraform/*/keys/
 01-docker-terraform/terraform/*/keys/
 
+# GCP Credentials
+gcp-key*.json
+gcp-key*.txt
+**/gcp-key*
+02-workflow-orchestration/gcp-key*
+02-workflow-orchestration/sudo
+
 # ============================================
 # TERRAFORM
 # ============================================
@@ -48,6 +55,15 @@ pipeline/*.csv.gz
 pipeline/taxi_zone_lookup.csv
 pipeline/yellow_tripdata_*.csv.gz
 pipeline/green_tripdata_*.csv.gz
+
+# dbt & DuckDB
+*.duckdb
+*.duckdb.wal
+**/taxi_rides_ny.duckdb
+04-analytics-engineering/**/data/
+04-analytics-engineering/**/*.duckdb
+profiles.yml
+!04-analytics-engineering/taxi_rides_ny/profiles.yml.example
 
 # ============================================
 # PYTHON
@@ -119,13 +135,5 @@ bfg.jar
 # !package.json
 # !tsconfig.json
 
-notes1.md
-notes2.md
-01-documentation.md
-week2_medium_blog.md
-tutorialNote.md
-sudo
-01-documentation.md
-gcp-key-base64.txt
-Medium_blog.md
-week3_2026_medium_blog.md
+*.md
+!README.md
