@@ -137,4 +137,12 @@ bfg.jar
 
 *.md
 !README.md
-!week4_2026_answer.md
+!week1_2026_answer.md
+!week2_2026_answer.md
+!week3_2026_answer.md
+!eek4_2026_answer.md
+!week5_2026_answer.md
+
+.bruin.yml
+logs/runs
+logs/*.log

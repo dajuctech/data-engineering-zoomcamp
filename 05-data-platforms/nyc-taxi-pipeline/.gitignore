@@ -1,0 +1,46 @@
+# Bruin credentials & config (NEVER COMMIT)
+.bruin.yml
+
+# DuckDB database files (data, not source code)
+duckdb.db
+duckdb.db*
+*.db
+*.sqlite
+
+# Bruin logs & run artifacts
+logs/runs
+logs/queries
+logs/*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+*.tmp
