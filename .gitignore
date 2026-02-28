@@ -45,6 +45,7 @@ terraform.rc
 # ============================================
 *.csv
 *.csv.gz
+*.csv.*
 *.parquet
 data/*.parquet
 data/*.csv
@@ -55,6 +56,19 @@ pipeline/*.csv.gz
 pipeline/taxi_zone_lookup.csv
 pipeline/yellow_tripdata_*.csv.gz
 pipeline/green_tripdata_*.csv.gz
+
+# Spark output files (written by Spark after every job)
+_SUCCESS
+.*SUCCESS.crc
+*.crc
+
+# 06-batch generated data directories (large parquet datasets, not source code)
+06-batch/data/
+06-batch/tmp/
+06-batch/zones/
+
+# Large downloaded page/html files
+*.page
 
 # dbt & DuckDB
 *.duckdb
@@ -137,11 +151,8 @@ bfg.jar
 
 *.md
 !README.md
-!week1_2026_answer.md
-!week2_2026_answer.md
-!week3_2026_answer.md
-!eek4_2026_answer.md
 !week5_2026_answer.md
+
 
 .bruin.yml
 logs/runs
